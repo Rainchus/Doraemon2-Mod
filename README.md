@@ -1,4 +1,4 @@
-# Current fucntionality
+# Current functionality
 - Z to levitate
 - Dpad-left to save position
 - Dpad-right to load position
