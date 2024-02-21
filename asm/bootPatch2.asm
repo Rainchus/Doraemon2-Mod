@@ -1,8 +1,5 @@
 .headersize 0x80025C00 - 0x1000
 .org 0x80025C00
-
-//0x30610
-
 LUI t0, 0x800F
 ADDIU t0, t0, 0x0A40
 LUI t1, 0x0003
@@ -30,5 +27,9 @@ LW t1, 0x0010 (t0)
 ANDI t1, t1, 0x0001
 BNEZ t1, dmaBusyLoop
 NOP
-//J 0x80025C50 //normally the code jumps to this addr, but it's right below
-//NOP
+
+//80093C00 writes Y to the stack
+//inputs to function call at 8003D378 sets Y pos
+.org 0x8003D414
+J levitateHook
+ADDIU sp, sp, 0x80

@@ -55,7 +55,7 @@ genMain:
 #	$(file >> $(OUTPUT_FILE),.include "asm/bootPatch.asm")
 	$(foreach obj_file,$(OBJECTS),$(file >> $(OUTPUT_FILE),.importobj "$(obj_file)"))
 # put this last because it modifies the headersize
-#	$(file >> $(OUTPUT_FILE),.include "asm/hooks.s")
+#	$(file >> $(OUTPUT_FILE),.include "asm/levitate.asm")
 	$(file >> $(OUTPUT_FILE),.close //close file)
 
 # Rule for creating the obj folder
