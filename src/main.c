@@ -1,8 +1,5 @@
 #include "../include/main.h"
 
-s32 LHeldFrameCounter = 0;
-f32 yPosCopy = 0.0f;
-
 typedef struct Vec3f {
     f32 x;
     f32 y;
@@ -19,11 +16,16 @@ typedef struct Player {
     PlayerData* playerData;
 } Player;
 
+s32 LHeldFrameCounter = 0;
+f32 yPosCopy = 0.0f;
+
+Vec3f playerPositionCopy = {0};
+
 extern u16 p1ButtonsHeld;
 extern Player PlayerMain;
 
 void LevitateHook(void) {
-    if (p1ButtonsHeld & 0x2000) {
+    if (p1ButtonsHeld & 0x2000) { //Z
         if (LHeldFrameCounter == 0) {
             yPosCopy = PlayerMain.playerData->pos.y;
         }
@@ -33,6 +35,12 @@ void LevitateHook(void) {
     } else {
         LHeldFrameCounter = 0;
         yPosCopy = 0.0f;
+    }
+
+    if (p1ButtonsHeld & 0x200) { //dpad left
+        playerPositionCopy = PlayerMain.playerData->pos;
+    } else if (p1ButtonsHeld & 0x100) { //dpad right
+        PlayerMain.playerData->pos = playerPositionCopy;
     }
 }
 
